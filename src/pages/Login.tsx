@@ -1,6 +1,8 @@
+// Importações de imagens e ícones
 import { KeyIcon, UserIcon } from "@phosphor-icons/react";
 import Logo from "../assets/icons/glowhub_logo.svg"
 
+// Componentes
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 
@@ -29,7 +31,7 @@ export const Login = () => {
 
         <div className="flex flex-col gap-4">
           <Button children="Entrar" />
-          <a href="#" className="text-primary text-[.875rem] font-bold">Criar uma nova conta</a>
+          <a href="#" className="text-primary text-[.875rem] font-bold hover:text-primary/80 active:text-primary/80">Criar uma nova conta</a>
         </div>
 
       </div>

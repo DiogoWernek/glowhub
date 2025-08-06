@@ -1,5 +1,8 @@
-import { EyeClosedIcon, EyeIcon } from "@phosphor-icons/react";
+// Importação para código
 import React, { useState } from "react";
+
+// Importação de ícones/Imagens
+import { EyeClosedIcon, EyeIcon } from "@phosphor-icons/react";
 
 type InputProps = React.ComponentProps<"input"> & {
   children?: React.ReactNode; // Conteúdo de dentro do Input, se houver, como ícones.
