@@ -51,7 +51,7 @@ export const Input = ({
 
         <input
           type={inputType}
-          className="flex-1 min-w-0 bg-transparent outline-none"
+          className="flex-1 min-w-0 bg-transparent outline-none text-[0.8rem]"
         />
 
         {type === "password" && (

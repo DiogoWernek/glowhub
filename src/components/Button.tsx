@@ -26,7 +26,7 @@ export const Button = ({
       {loading ? (
         <Loading color={disabled ? "#999" : "white"} />
       ) : (
-        <p className="text-[0.9rem] p-3 font-bold">{children}</p>
+        <p className="text-[0.9rem] p-3 font-bold flex items-center justify-center gap-0.5">{children}</p>
       )}
     </button>
   );
