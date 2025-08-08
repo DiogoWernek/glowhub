@@ -33,7 +33,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2.5">
       <div
         ref={modalRef}
         className="bg-white rounded-lg shadow-lg max-w-md w-full relative p-6"

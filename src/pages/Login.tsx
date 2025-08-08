@@ -1,20 +1,23 @@
+import { useState } from "react";
+
 // Importações de imagens e ícones
-import { EnvelopeIcon, KeyIcon, UserIcon } from "@phosphor-icons/react";
+import { EnvelopeIcon, EnvelopeSimpleIcon, KeyIcon } from "@phosphor-icons/react";
 import Logo from "../assets/icons/glowhub_logo.svg";
 
 // Componentes
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { Modal } from "../components/modal";
-import { useState } from "react";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showModalPassword, setShowModalPassword] = useState(false);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-background px-[1rem]">
       {/* Container principal do login */}
-      <div className="flex flex-col text-center border-2 border-border-primary rounded-[0.5rem] p-6 py-12 pb-4 bg-white gap-5 shadow-lg w-full max-w-[22rem]">
+      <form className="flex flex-col text-center border-2 border-border-primary rounded-[0.5rem] p-6 py-12 pb-4 bg-white gap-5 shadow-lg w-full max-w-[22rem]">
         <div className="flex flex-col items-center gap-0.5">
           <img src={Logo} alt="Logo GlowHub" className="w-20 mb-2" />
           <h1 className="text-text-primary text-2xl font-bold">Glowhub</h1>
@@ -25,12 +28,19 @@ export const Login = () => {
         </div>
 
         <div className="flex flex-col gap-4">
-          <Input label="Usuário">
-            <UserIcon size={18} />
+          <Input 
+            label="E-mail"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          >
+            <EnvelopeSimpleIcon size={18} />
           </Input>
           <Input
             label="Senha"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           >
             <KeyIcon size={18} />
           </Input>
@@ -39,7 +49,7 @@ export const Login = () => {
         <div className="flex flex-col gap-4">
           <Button children="Entrar" />
           <a
-            href="#"
+            href="/cadastro"
             className="text-primary text-[.875rem] font-bold hover:text-primary/80 active:text-primary/80"
           >
             Criar uma nova conta
@@ -52,7 +62,7 @@ export const Login = () => {
         >
           Esqueci minha senha
         </button>
-      </div>
+      </form>
 
       <Modal
         isOpen={showModalPassword}
@@ -68,7 +78,10 @@ export const Login = () => {
             Insira seu e-mail cadastrado para receber as instruções de
             recuperação de senha.
           </p>
-          <Input label="E-mail" type="email">
+          <Input 
+            label="E-mail" 
+            type="email"
+          >
             <EnvelopeIcon size={18} />
           </Input>
           <Button children="Enviar Instruções" />

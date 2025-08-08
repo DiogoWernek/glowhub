@@ -14,6 +14,8 @@ type InputProps = React.ComponentProps<"input"> & {
   type?: "text" | "password" | "email" | "number"; // Tipo do input, com "text" como padrão.
   label?: string; // Rótulo do input, se necessário.
   hasError?: InputError; // Estado de erro opcional, com mensagem de erro.
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 // Tipagem do erro para receber status e mensagem
@@ -27,12 +29,14 @@ export const Input = ({
   type = "text",
   label,
   hasError = { status: false, message: "" },
+  value = "",
+  onChange,
+  ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Função para mostrar ou esconder a senha, se o tipo for "password".
-  const inputType =
-    type === "password" ? (showPassword ? "text" : "password") : type;
+  const inputType = type === "password" ? (showPassword ? "text" : "password") : type;
 
   return (
     <div className="flex flex-col gap-1 items-start w-full">
@@ -52,16 +56,23 @@ export const Input = ({
         <input
           type={inputType}
           className="flex-1 min-w-0 bg-transparent outline-none text-[0.8rem]"
+          value={value}
+          onChange={onChange}
+          {...rest}
         />
 
-        {type === "password" && (
-          <button
-            className="cursor-pointer"
-            onClick={() => setShowPassword((prev) => !prev)}
-          >
-            {showPassword === true ? <EyeIcon /> : <EyeClosedIcon />}
-          </button>
-        )}
+              {type === "password" && (
+                <button
+                  className="cursor-pointer"
+                  type="button"
+                  onClick={e => {
+                    e.preventDefault();
+                    setShowPassword((prev) => !prev);
+                  }}
+                >
+                  {showPassword === true ? <EyeIcon /> : <EyeClosedIcon />}
+                </button>
+              )}
       </div>
 
       {hasError.status === true ? (
