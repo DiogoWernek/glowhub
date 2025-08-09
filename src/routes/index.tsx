@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+
+// Pages
 import { Login } from "../pages/Login";
 import { NotFound } from "../pages/NotFound";
 import { Register } from "../pages/Register";

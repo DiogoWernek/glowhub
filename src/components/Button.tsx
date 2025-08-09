@@ -12,6 +12,7 @@ export const Button = ({
   onClick,
   loading = false,
   disabled = false,
+  ...rest
 }: ButtonProps) => {
   return (
     <button
@@ -22,6 +23,7 @@ export const Button = ({
           ? "bg-gray-300 cursor-not-allowed text-gray-500"
           : "bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer text-white"
         }`}
+      {...rest}
     >
       {loading ? (
         <Loading color={disabled ? "#999" : "white"} />

@@ -11,11 +11,13 @@ import {
 // Tipagem do input e todas suas Props
 type InputProps = React.ComponentProps<"input"> & {
   children?: React.ReactNode; // Conteúdo de dentro do Input, se houver, como ícones.
-  type?: "text" | "password" | "email" | "number"; // Tipo do input, com "text" como padrão.
+  type?: "text" | "password" | "email" | "number" | "tel"; // Tipo do input, com "text" como padrão.
   label?: string; // Rótulo do input, se necessário.
   hasError?: InputError; // Estado de erro opcional, com mensagem de erro.
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean; // Indica se o input está desabilitado.
+  asterisk?: boolean; // Indica se o campo é obrigatório.
 };
 
 // Tipagem do erro para receber status e mensagem
@@ -31,16 +33,22 @@ export const Input = ({
   hasError = { status: false, message: "" },
   value = "",
   onChange,
+  asterisk = false,
+  disabled = false,
   ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Função para mostrar ou esconder a senha, se o tipo for "password".
-  const inputType = type === "password" ? (showPassword ? "text" : "password") : type;
+  const inputType =
+    type === "password" ? (showPassword ? "text" : "password") : type;
 
   return (
     <div className="flex flex-col gap-1 items-start w-full">
-      <label className="font-bold text-[0.875rem]">{label && label}</label>
+      <label className="font-bold text-[0.875rem]">
+        {label && label}
+        <small className="text-red-base text-[0.8rem]">{asterisk && "*"}</small>
+      </label>
 
       <div
         className={`flex items-center gap-2 overflow-hidden px-3 py-2 rounded w-full transition-colors 
@@ -49,30 +57,37 @@ export const Input = ({
               ? "border-red-base ring-2 ring-red-300"
               : "border border-gray-300 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary"
           }
+          ${disabled ? "bg-gray-100 text-gray-400 cursor-not-allowed" : ""}
         `}
       >
         {children && children}
 
         <input
           type={inputType}
-          className="flex-1 min-w-0 bg-transparent outline-none text-[0.8rem]"
+          className={`flex-1 min-w-0 outline-none text-[0.8rem] bg-transparent 
+                  ${
+                    disabled
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : ""
+                  }`}
           value={value}
           onChange={onChange}
+          disabled={disabled}
           {...rest}
         />
 
-              {type === "password" && (
-                <button
-                  className="cursor-pointer"
-                  type="button"
-                  onClick={e => {
-                    e.preventDefault();
-                    setShowPassword((prev) => !prev);
-                  }}
-                >
-                  {showPassword === true ? <EyeIcon /> : <EyeClosedIcon />}
-                </button>
-              )}
+        {type === "password" && (
+          <button
+            className="cursor-pointer"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowPassword((prev) => !prev);
+            }}
+          >
+            {showPassword === true ? <EyeIcon /> : <EyeClosedIcon />}
+          </button>
+        )}
       </div>
 
       {hasError.status === true ? (
