@@ -12,6 +12,7 @@ import Logo from "../assets/icons/glowhub_logo.svg";
 // Componentes
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
+import { Modal } from "../components/Modal";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
