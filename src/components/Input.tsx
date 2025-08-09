@@ -17,7 +17,7 @@ type InputProps = React.ComponentProps<"input"> & {
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean; // Indica se o input está desabilitado.
-  asterisk?: boolean; // Indica se o campo é obrigatório.
+  required?: boolean; // Indica se o campo é obrigatório.
 };
 
 // Tipagem do erro para receber status e mensagem
@@ -33,7 +33,7 @@ export const Input = ({
   hasError = { status: false, message: "" },
   value = "",
   onChange,
-  asterisk = false,
+  required = false,
   disabled = false,
   ...rest
 }: InputProps) => {
@@ -47,7 +47,7 @@ export const Input = ({
     <div className="flex flex-col gap-1 items-start w-full">
       <label className="font-bold text-[0.875rem]">
         {label && label}
-        <small className="text-red-base text-[0.8rem]">{asterisk && "*"}</small>
+        <small className="text-red-base text-[0.8rem]">{required && "*"}</small>
       </label>
 
       <div

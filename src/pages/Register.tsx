@@ -32,7 +32,7 @@ export const Register = () => {
             label="Nome completo"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            asterisk
+            required
           >
             <UserIcon size={18} />
           </Input>
@@ -42,7 +42,7 @@ export const Register = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            asterisk
+            required
           >
             <EnvelopeSimpleIcon size={18} />
           </Input>
@@ -52,7 +52,7 @@ export const Register = () => {
             type="tel"
             value={formatCellphone(phoneNumber)}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            asterisk
+            required
           >
             <PhoneIcon size={18} />
           </Input>
@@ -61,7 +61,7 @@ export const Register = () => {
             label="CPF"
             value={formatCPF(cpf)}
             onChange={(e) => setCpf(e.target.value)}
-            asterisk
+            required
           >
             <IdentificationCardIcon size={18} />
           </Input>
@@ -71,7 +71,7 @@ export const Register = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            asterisk
+            required
           >
             <LockIcon size={18} />
           </Input>
@@ -81,7 +81,7 @@ export const Register = () => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            asterisk
+            required
           >
             <LockIcon size={18} />
           </Input>
