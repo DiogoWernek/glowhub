@@ -66,7 +66,7 @@ export const Login = () => {
         <div className="flex flex-col gap-4 w-full">
           <Button children="Entrar" />
           <a
-            href="/cadastro"
+            href="/register"
             className="text-primary text-[.875rem] font-bold hover:text-primary/80 active:text-primary/80"
           >
             Criar uma nova conta
