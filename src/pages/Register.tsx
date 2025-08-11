@@ -87,7 +87,7 @@ export const Register = () => {
           </Input>
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-4 w-full">
           <Button>Cadastrar</Button>
           <a
             href="/"
