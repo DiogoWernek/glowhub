@@ -5,6 +5,8 @@ type ButtonProps = React.ComponentProps<"button"> & {
   onClick?: () => void; // Função a ser chamada ao clicar no botão.
   loading?: boolean; // Indica se o botão está em estado de carregamento.
   disabled?: boolean; // Indica se o botão está desabilitado.
+  gap?: string; // Define o espaçamento entre os itens dentro do botão.
+  buttonType?: number; // Define o tipo de botão, usado para aplicar estilos diferentes.
 };
 
 export const Button = ({
@@ -12,23 +14,45 @@ export const Button = ({
   onClick,
   loading = false,
   disabled = false,
+  gap = "gap-0.5",
+  buttonType = 1, // 1: padrão, 2: com borda
   ...rest
 }: ButtonProps) => {
   return (
     <button
-      disabled={disabled || loading}
+      disabled={disabled}
       onClick={onClick}
-      className={`flex w-full min-h-[2.8125rem] rounded-[0.5rem] text-center justify-center items-center transition duration-200 
-        ${disabled || loading
-          ? "bg-gray-300 cursor-not-allowed text-gray-500"
-          : "bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer text-white"
-        }`}
+      className={`
+        ${
+          buttonType === 1
+            ? "flex w-full min-h-[2.8125rem] rounded-[0.5rem] text-center justify-center items-center transition duration-200 bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer text-white"
+            : ""
+        }
+        ${
+          buttonType === 2
+            ? "flex w-full items-center min-h-[2.8125rem] justify-center text-center border border-primary rounded-[0.5rem] cursor-pointer hover:bg-primary active:bg-primary/80 transition-colors group"
+            : ""
+        }
+        ${disabled ? "bg-gray-300 cursor-not-allowed text-gray-500" : ""}
+        `}
       {...rest}
     >
-      {loading ? (
-        <Loading color={disabled ? "#999" : "white"} />
-      ) : (
-        <p className="text-[0.9rem] p-3 font-bold flex items-center justify-center gap-0.5">{children}</p>
+      <p
+        className={`
+          ${buttonType === 1 ? "text-[0.875rem]" : ""}
+          ${buttonType === 2 ? "text-[0.875rem] text-primary group-hover:text-white transition-colors" : ""}
+          text-[0.9rem] p-3 font-bold flex items-center justify-center ${gap} ${
+          loading ? "invisible" : ""
+        }`}
+      >
+        {children}
+      </p>
+
+      {/* Loading sobreposto */}
+      {loading && (
+        <span className="absolute">
+          <Loading color={disabled ? "#999" : "white"} />
+        </span>
       )}
     </button>
   );

@@ -17,7 +17,6 @@ export default function AppRoutes() {
         {/* Rotas do sistema logado */}
         <Route path="/companies" element={<SystemLayout />}>
           <Route index element={<Companies />} />
-
         </Route>
 
         {/* Rota 404 */}
