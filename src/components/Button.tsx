@@ -25,12 +25,12 @@ export const Button = ({
       className={`
         ${
           buttonType === 1
-            ? "flex w-full min-h-[2.8125rem] rounded-[0.5rem] text-center justify-center items-center transition duration-200 bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer text-white"
+            ? "flex w-full max-h-[2.875rem] rounded-[0.5rem] text-center justify-center items-center transition duration-200 bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer text-white"
             : ""
         }
         ${
           buttonType === 2
-            ? "flex w-full items-center min-h-[2.8125rem] justify-center text-center border border-primary rounded-[0.5rem] cursor-pointer hover:bg-primary active:bg-primary/80 transition-colors group"
+            ? "flex w-full items-center max-h-[2.875rem] justify-center text-center border border-primary rounded-[0.5rem] cursor-pointer hover:bg-primary active:bg-primary/80 transition-colors group"
             : ""
         }
         ${disabled ? "bg-gray-300 cursor-not-allowed text-gray-500" : ""}
@@ -41,7 +41,7 @@ export const Button = ({
         className={`
           ${buttonType === 1 ? "text-[0.875rem]" : ""}
           ${buttonType === 2 ? "text-[0.875rem] text-primary group-hover:text-white transition-colors" : ""}
-          text-[0.9rem] p-3 font-bold flex items-center justify-center ${gap} ${
+          p-2.5 font-bold flex ${gap} ${
           loading ? "invisible" : ""
         }`}
       >

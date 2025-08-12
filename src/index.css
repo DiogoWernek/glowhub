@@ -8,9 +8,13 @@
   --color-primary-light: #B9A3E6;
   
   --color-red-base: #FF5252;
+  --color-green-base: #4CAF50;
+  --color-yellow-base: #FFD166;
   
   --color-text-primary: #21262f;
+  --color-text-tertiary: #6a737d;
   --color-text-secondary: #586069;
+
   --color-border-primary: #e5e7eb;
 
   --default-font-family: "Poppins", sans-serif;
@@ -20,11 +24,11 @@ body {
   background-color: var(--color-background);
   
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 0.25rem;
   }
 
   &::-webkit-scrollbar-thumb {
+    border-radius: 0.25rem;
     background-color: #cbcbcb;
-    border-radius: 4px;
   }
 }

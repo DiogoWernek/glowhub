@@ -1,25 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+// Imagens e ícones
 import { ListIcon, SignOutIcon, XIcon } from "@phosphor-icons/react";
 import Logo from "../assets/icons/glowhub_logo.svg";
+
+// Componentes
 import { Button } from "./Button";
 
+// Hooks
+import { useIsMobile } from "../hooks/useIsMobile";
+
 export const Header = () => {
-  const [isMobile, setIsMobile] = useState(true);
-  const [showMenu, setShowMenu] = useState(false); // Renderiza no DOM
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Controla animação
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setIsMobile(width <= 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+  const [showMenu, setShowMenu] = useState<boolean>(false); // Renderiza no DOM
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false); // Controla animação
+  
+  const isMobile = useIsMobile(); // Hook para detectar se é mobile
+  
   const openMenu = () => {
     setShowMenu(true);
     setTimeout(() => setIsMenuOpen(true), 10); // pequeno delay p/ animação
@@ -32,7 +28,7 @@ export const Header = () => {
 
   return (
     <div>
-      <header className="bg-background border-b-2 border-border-primary p-4 w-full fixed justify-between items-center flex">
+      <header className="bg-background border-b-2 border-border-primary p-4 w-full fixed justify-between items-center flex shadow-lg z-10">
         <div className="flex items-center gap-2">
           <img src={Logo} alt="Logo GlowHub" className="w-10 h-10" />
           <div className="flex flex-col">
@@ -61,11 +57,11 @@ export const Header = () => {
               href="#"
               className="text-text-primary hover:text-text-secondary transition-colors"
             >
-              Configurações
+              Planos
             </a>
             <Button buttonType={2}>
               Sair
-              <SignOutIcon size={16} />
+              <SignOutIcon size={20} />
             </Button>
           </nav>
         )}
@@ -100,13 +96,13 @@ export const Header = () => {
                 href="#"
                 className="text-text-primary hover:text-text-secondary transition-colors"
               >
-                Configurações
+                Planos
               </a>
             </nav>
 
-            <Button gap="gap-2">
+            <Button gap="gap-1">
               Sair
-              <SignOutIcon size={16} />
+              <SignOutIcon size={18} />
             </Button>
           </div>
         </div>

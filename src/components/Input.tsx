@@ -6,12 +6,13 @@ import {
   EyeClosedIcon,
   EyeIcon,
   WarningCircleIcon,
+  XIcon,
 } from "@phosphor-icons/react";
 
 // Tipagem do input e todas suas Props
 type InputProps = React.ComponentProps<"input"> & {
   children?: React.ReactNode; // Conteúdo de dentro do Input, se houver, como ícones.
-  type?: "text" | "password" | "email" | "number" | "tel"; // Tipo do input, com "text" como padrão.
+  type?: "text" | "password" | "email" | "number" | "tel" | "search"; // Tipo do input, com "text" como padrão.
   label?: string; // Rótulo do input, se necessário.
   hasError?: InputError; // Estado de erro opcional, com mensagem de erro.
   value?: string | number;
@@ -64,17 +65,26 @@ export const Input = ({
 
         <input
           type={inputType}
-          className={`flex-1 min-w-0 outline-none text-[0.8rem] bg-transparent 
-                  ${
-                    disabled
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : ""
-                  }`}
+          className={`flex-1 min-w-0 outline-none text-[1rem] bg-transparent
+            ${disabled ? "bg-gray-100 text-gray-400 cursor-not-allowed" : ""}
+            [&::-webkit-search-cancel-button]:appearance-none
+            [&::-webkit-search-cancel-button]:hidden
+          `}
           value={value}
           onChange={onChange}
           disabled={disabled}
           {...rest}
         />
+
+        {type === "search" && String(value).length > 0 && (
+          <button
+            type="button"
+            onClick={() => onChange?.({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>)}
+            className="text-gray-400 hover:text-gray-600 transition cursor-pointer"
+          >
+            <XIcon size={18} />
+          </button>
+        )}
 
         {type === "password" && (
           <button
