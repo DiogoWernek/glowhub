@@ -1,7 +1,9 @@
+import { CardCompany } from "../components/CardCompany"
+
 export const Companies = () => {
   return(
-    <div className="flex min-h-screen justify-center items-center">
-      
+    <div className="flex min-h-screen">
+      <CardCompany />
 
     </div>
   )
