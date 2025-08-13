@@ -39,7 +39,7 @@ export const Login = () => {
             className="text-primary group-hover:text-white transition-colors"
           />
           <p className="text-[0.75rem] text-primary group-hover:text-white transition-colors">
-            Continue com o Google
+            Login com o Google
           </p>
         </div>
 

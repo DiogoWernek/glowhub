@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // Imagens e ícones
-import { EnvelopeSimpleIcon, IdentificationCardIcon, LockIcon, PhoneIcon, UserIcon } from "@phosphor-icons/react";
+import { EnvelopeSimpleIcon, GoogleLogoIcon, IdentificationCardIcon, LockIcon, PhoneIcon, UserIcon } from "@phosphor-icons/react";
 
 // Componentes
 import { Input } from "../components/Input";
@@ -28,6 +28,16 @@ export const Register = () => {
         </div>
 
          <div className="flex flex-col gap-4">
+        <div className="flex items-center justify-center gap-1 border border-primary rounded-[0.5rem] p-2 cursor-pointer hover:bg-primary active:bg-primary/80 transition-colors group">
+          <GoogleLogoIcon
+            size={16}
+            className="text-primary group-hover:text-white transition-colors"
+          />
+          <p className="text-[0.75rem] text-primary group-hover:text-white transition-colors">
+            Continue com o Google
+          </p>
+        </div>
+
           <Input 
             label="Nome completo"
             value={name}

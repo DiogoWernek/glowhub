@@ -45,7 +45,7 @@ export const Input = ({
     type === "password" ? (showPassword ? "text" : "password") : type;
 
   return (
-    <div className="flex flex-col gap-1 items-start w-full">
+    <div className="flex flex-col items-start w-full">
       <label className="font-bold text-[0.875rem]">
         {label && label}
         <small className="text-red-base text-[0.8rem]">{required && "*"}</small>
@@ -95,7 +95,7 @@ export const Input = ({
               setShowPassword((prev) => !prev);
             }}
           >
-            {showPassword === true ? <EyeIcon /> : <EyeClosedIcon />}
+            {showPassword === true ?  <EyeClosedIcon /> : <EyeIcon />}
           </button>
         )}
       </div>
