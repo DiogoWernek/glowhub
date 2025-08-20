@@ -49,6 +49,7 @@ export const Login = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="email@example.com.br"
           >
             <EnvelopeSimpleIcon size={18} />
           </Input>
@@ -58,6 +59,7 @@ export const Login = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="********"
           >
             <KeyIcon size={18} />
           </Input>

@@ -22,7 +22,7 @@ export const NotFound = () => {
        
         <div>
           <Button onClick={handleBack}>
-            <ArrowLeftIcon />
+            <ArrowLeftIcon size={16} />
             Voltar
           </Button>
         </div>

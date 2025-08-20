@@ -12,7 +12,7 @@ import {
 // Tipagem do input e todas suas Props
 type InputProps = React.ComponentProps<"input"> & {
   children?: React.ReactNode; // Conteúdo de dentro do Input, se houver, como ícones.
-  type?: "text" | "password" | "email" | "number" | "tel" | "search"; // Tipo do input, com "text" como padrão.
+  type?: "text" | "password" | "email" | "number" | "tel" | "search" | "textarea"; // Tipo do input, com "text" como padrão.
   label?: string; // Rótulo do input, se necessário.
   hasError?: InputError; // Estado de erro opcional, com mensagem de erro.
   value?: string | number;

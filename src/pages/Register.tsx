@@ -42,6 +42,7 @@ export const Register = () => {
             label="Nome completo"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Seu nome completo"
             required
           >
             <UserIcon size={18} />
@@ -52,6 +53,7 @@ export const Register = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="email@example.com.br"
             required
           >
             <EnvelopeSimpleIcon size={18} />
@@ -62,6 +64,7 @@ export const Register = () => {
             type="tel"
             value={formatCellphone(phoneNumber)}
             onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="(99) 99999-9999"
             required
           >
             <PhoneIcon size={18} />
@@ -71,6 +74,7 @@ export const Register = () => {
             label="CPF"
             value={formatCPF(cpf)}
             onChange={(e) => setCpf(e.target.value)}
+            placeholder="999.999.999-99"
             required
           >
             <IdentificationCardIcon size={18} />
@@ -81,6 +85,7 @@ export const Register = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="*******"
             required
           >
             <LockIcon size={18} />
@@ -91,6 +96,7 @@ export const Register = () => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="*******"
             required
           >
             <LockIcon size={18} />
