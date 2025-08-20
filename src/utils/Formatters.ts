@@ -33,3 +33,9 @@ export function formatCNPJ(cnpj: string): string {
   if (cleaned.length <= 12) return `${cleaned.slice(0, 2)}.${cleaned.slice(2, 5)}.${cleaned.slice(5, 8)}/${cleaned.slice(8)}`;
   return `${cleaned.slice(0, 2)}.${cleaned.slice(2, 5)}.${cleaned.slice(5, 8)}/${cleaned.slice(8, 12)}-${cleaned.slice(12, 14)}`;
 }
+
+export function formatCEP(cep: string): string {
+  const cleaned = cep.replace(/\D/g, "");
+  if (cleaned.length <= 5) return cleaned;
+  return `${cleaned.slice(0, 5)}-${cleaned.slice(5, 8)}`;
+}

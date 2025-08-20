@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Imagens e ícones
 import { PlusIcon } from "@phosphor-icons/react";
@@ -14,7 +14,10 @@ import { Select } from "../components/Select";
 import { useIsMobile } from "../hooks/useIsMobile";
 
 // Utils
-import { formatCellphone } from "../utils/Formatters";
+import { formatCellphone, formatCEP } from "../utils/Formatters";
+
+// Libs
+import { toast } from "react-toastify";
 
 export const Companies = () => {
   const [searchCompany, setSearchCompany] = useState<string>(""); // Estado para armazenar a pesquisa
@@ -24,6 +27,7 @@ export const Companies = () => {
   const [companyName, setCompanyName] = useState<string>(""); // Estado para armazenar o nome da empresa
   const [description, setDescription] = useState<string>(""); // Estado para armazenar a descrição da empresa
   const [cep, setCep] = useState<string>(""); // Estado para armazenar o CEP da empresa
+  const [cepError, setCepError] = useState<AppError>({status: false , message: ""}); // Estado para armazenar o erro do CEP
   const [street, setStreet] = useState<string>(""); // Estado para armazenar a rua da empresa
   const [number, setNumber] = useState<string>(""); // Estado para armazenar o número da empresa
   const [complement, setComplement] = useState<string>(""); // Estado para armazenar o complemento da empresa
@@ -83,6 +87,34 @@ export const Companies = () => {
   const filteredCompanies = companies.filter((company) =>
     company.name.toLowerCase().includes(searchCompany.toLowerCase())
   );
+
+  const searchCep = async (cep: string) => {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.ok) {
+        throw new Error("Erro ao buscar CEP");
+      }
+      const data = await response.json();
+      if (data.erro) {
+        throw new Error("CEP não encontrado");
+      }
+      setStreet(data.logradouro || "");
+      setNeighborhood(data.bairro || "");
+      setCity(data.localidade || "");
+      setState(data.uf || "");
+    }
+    catch (error) {
+      console.error("Erro ao buscar CEP:", error);
+      toast.error("CEP inválido ou não encontrado.");
+      setCepError({status: true , message: "CEP inválido ou não encontrado."}); 
+    }
+  }
+
+  useEffect(() => {
+    if (cep.length === 9) {
+      searchCep(cep);
+    }
+  }, [cep]);
 
   return (
     <div className="flex flex-col min-h-screen items-center gap-6">
@@ -151,8 +183,10 @@ export const Companies = () => {
             <Input
               label="CEP"
               placeholder="Digite o CEP da empresa"
-              value={cep}
-              onChange={(e) => setCep(e.target.value)}
+              value={formatCEP(cep)}
+              onChange={(e) => {setCep(e.target.value); setCepError({status: false , message: ""})}}
+              hasError={cepError}
+              maxLength={9}
               required
             />
 
