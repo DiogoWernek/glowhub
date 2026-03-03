@@ -36,7 +36,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2.5">
       <div
         ref={modalRef}
-        className="bg-white rounded-lg shadow-lg max-w-md w-full relative p-6 
+        className="bg-white rounded-lg shadow-lg max-w-lg w-full relative p-6 
                max-h-[90vh] overflow-y-auto scrollbar-custom"
       >
         <button

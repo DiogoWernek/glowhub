@@ -27,7 +27,10 @@ export const Companies = () => {
   const [companyName, setCompanyName] = useState<string>(""); // Estado para armazenar o nome da empresa
   const [description, setDescription] = useState<string>(""); // Estado para armazenar a descrição da empresa
   const [cep, setCep] = useState<string>(""); // Estado para armazenar o CEP da empresa
-  const [cepError, setCepError] = useState<AppError>({status: false , message: ""}); // Estado para armazenar o erro do CEP
+  const [cepError, setCepError] = useState<AppError>({
+    status: false,
+    message: "",
+  }); // Estado para armazenar o erro do CEP
   const [street, setStreet] = useState<string>(""); // Estado para armazenar a rua da empresa
   const [number, setNumber] = useState<string>(""); // Estado para armazenar o número da empresa
   const [complement, setComplement] = useState<string>(""); // Estado para armazenar o complemento da empresa
@@ -102,13 +105,12 @@ export const Companies = () => {
       setNeighborhood(data.bairro || "");
       setCity(data.localidade || "");
       setState(data.uf || "");
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Erro ao buscar CEP:", error);
       toast.error("CEP inválido ou não encontrado.");
-      setCepError({status: true , message: "CEP inválido ou não encontrado."}); 
+      setCepError({ status: true, message: "CEP inválido ou não encontrado." });
     }
-  }
+  };
 
   useEffect(() => {
     if (cep.length === 9) {
@@ -182,9 +184,12 @@ export const Companies = () => {
 
             <Input
               label="CEP"
-              placeholder="Digite o CEP da empresa"
+              placeholder="Ex: 12345-678"
               value={formatCEP(cep)}
-              onChange={(e) => {setCep(e.target.value); setCepError({status: false , message: ""})}}
+              onChange={(e) => {
+                setCep(e.target.value);
+                setCepError({ status: false, message: "" });
+              }}
               hasError={cepError}
               maxLength={9}
               required
@@ -192,26 +197,28 @@ export const Companies = () => {
 
             <Input
               label="Rua"
-              placeholder="Digite o nome da rua"
+              placeholder="Ex: Av. das Flores"
               value={street}
               onChange={(e) => setStreet(e.target.value)}
               required
             />
 
-            <Input
-              label="Número"
-              placeholder="Digite o número da empresa"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-              required
-            />
+            <div className="grid grid-cols-2 gap-2 w-full">
+              <Input
+                label="Número"
+                placeholder="Ex: 123"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                required
+              />
 
-            <Input
-              label="Complemento"
-              placeholder="Digite o complemento (opcional)"
-              value={complement}
-              onChange={(e) => setComplement(e.target.value)}
-            />
+              <Input
+                label="Complemento"
+                placeholder="Ex: Apto 101"
+                value={complement}
+                onChange={(e) => setComplement(e.target.value)}
+              />
+            </div>
 
             <Input
               label="Bairro"
@@ -220,24 +227,31 @@ export const Companies = () => {
               onChange={(e) => setNeighborhood(e.target.value)}
               required
             />
-            <Input
-              label="Cidade"
-              placeholder="Digite a cidade da empresa"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              required
-            />
 
-            <Select
-              label="Estado"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-              options={estadosBrasil.map((estado) => ({
-                value: estado.label,
-                label: estado.label,
-              }))}
-              required
-            />
+            <div className="grid grid-cols-3 gap-2 w-full">
+              <div className="col-span-2">
+                <Input
+                  label="Cidade"
+                  placeholder="Cidade da empresa"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="col-span-1">
+                <Select
+                  label="Estado"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  options={estadosBrasil.map((estado) => ({
+                    value: estado.label,
+                    label: estado.label,
+                  }))}
+                  required
+                />
+              </div>
+            </div>
 
             <Input
               label="Telefone"
@@ -258,11 +272,11 @@ export const Companies = () => {
 
             <Input
               label="Site"
-              placeholder="Digite o site da empresa (opcional)"
+              placeholder="Digite o site da empresa"
               value={site}
               onChange={(e) => setSite(e.target.value)}
             />
-          
+
             <Button buttonType={1} onClick={() => setShowModal(false)}>
               Criar Empresa
             </Button>
